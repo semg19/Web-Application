@@ -77,6 +77,8 @@
         </div>
     </nav>
 
+    @include('partials._messages')
+
     @yield('content')
 
     <!-- Scripts -->
