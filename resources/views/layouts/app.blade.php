@@ -79,6 +79,8 @@
 
     @include('partials._messages')
 
+    {{ Html::style('css/styles.css') }}
+
     @yield('content')
 
     <!-- Scripts -->
