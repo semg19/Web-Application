@@ -94,5 +94,19 @@ class PostController extends Controller
 
         return redirect()->route('posts.show', $post->id);
     }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $post = Post::find($id);
+
+        $post->delete();
+
+        Session::flash('success', 'This post was succesfully deleted.');
+        return redirect()->route('posts.index');
+    }
 }
 
