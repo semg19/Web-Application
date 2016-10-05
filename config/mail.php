@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'support@laracasts.com',
-        'name' => 'Laracasts Support',
+        'address' => 'noreply@mijnforum.nl',
+        'name' => 'Mijn forum',
     ],
 
     /*

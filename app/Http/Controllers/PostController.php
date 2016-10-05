@@ -11,12 +11,17 @@ use Session;
 class PostController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->paginate(10);
         return view('posts.index')->withPosts($posts);
     }
 

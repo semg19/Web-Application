@@ -18,5 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('forum', ['uses' => 'ForumController@getIndex', 'as' => 'forum.index']);
 
 Route::resource('posts', 'PostController');
