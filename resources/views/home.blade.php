@@ -15,8 +15,8 @@
                         @foreach($posts as $post)
                         <div class="col-md-8">
                         <h2>{{ $post->title }}</h2>
-                        <p>{{ $post->body }}</p>
-                        <a href="{{ route('forum.index', $post->id) }}" class="btn-primary btn-lg">Read more</a>
+                        <p>{{substr($post->body, 0, 250) }}{{ strlen($post->body) > 250 ? '...' : "" }}</p>
+                        <a href="{{ route('posts.show', $post->id) }}" class="btn-primary btn-lg">Read more</a>
                         <hr>
                         </div>
                         @endforeach

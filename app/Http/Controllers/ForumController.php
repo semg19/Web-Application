@@ -10,12 +10,14 @@ use App\Post;
 class ForumController extends Controller
 {
     public function getIndex() {
-        $posts = Post::paginate(10);
+        $posts = Post::orderBy('id', 'desc')->paginate(10);
 
         return view('forum.index')->withPosts($posts);
     }
 
     public function getSingle() {
-        return view('forum.single')->withPost($post);
+        //$post = Post::where('category_id', '=', $category_id)->first();
+
+        return view('posts.show')->withPost($post);
 }
 }

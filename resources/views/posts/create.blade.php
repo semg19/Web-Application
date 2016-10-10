@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('stylesheets')
+
+    {!! Html::style('css/select2.min.css') !!}
+
+@endsection
+
 @section('content')
 
         <div class="row">
@@ -11,26 +17,35 @@
                     {{ Form::label('title', 'Title:') }}
                     {{ Form:: text('title', null, array('class' => 'form-control')) }}
 
+                    {{ Form::label('category_id', 'Category:') }}
+                    <select class="form-control" name="category_id">
+                        @foreach($categories as $category)
+                            <option value='{{ $category->id }}'>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+
+                    {{ Form::label('tags', 'Tags:') }}
+                    <select class="form-control js-example-basic-multiple form-control" name="tags" multiple="multiple">
+                        @foreach($tags as $tag)
+                            <option value='{{ $tag->id }}'>{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
+                    <hr>
+
                     {{ Form::label('body', 'Post Body:') }}
                     {{ Form:: textarea('body', null, array('class' => 'form-control')) }}
 
                     {{ Form::submit('Create Post', array('class' => 'btn btn-success btn-lg btn-block')) }}
                 {!! Form::close() !!}
-
-                {{--<form method="POST" action="{{ route('posts.store') }}">--}}
-                    {{--<div class="form-group">--}}
-                        {{--<label name="title">Title:</label>--}}
-                        {{--<input id="title" name="title" class="form-control">--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<label name="body">Post Body:</label>--}}
-                        {{--<textarea id="body" name="body" rows="10" class="form-control"></textarea>--}}
-                    {{--</div>--}}
-                    {{--<input type="submit" value="Create Post" class="btn btn-success btn-lg btn-block">--}}
-                    {{--<input type="hidden" name="_token" value="{{ Session::token() }}">--}}
-                {{--</form>--}}
             </div>
         </div>
 
+@endsection
+
+@section('scripts')
+
+    <script type="text/javascript">
+        $('.select2-multi').select2();
+    </script>
 
 @endsection

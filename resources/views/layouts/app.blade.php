@@ -19,6 +19,7 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -34,7 +35,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
             </div>
@@ -64,6 +65,12 @@
                                     </a>
                                     <a href="{{ url('/posts') }}">
                                         Posts
+                                    </a>
+                                    <a href="{{ url('/categories') }}">
+                                        Categories
+                                    </a>
+                                    <a href="{{ url('/tags') }}">
+                                        Tags
                                     </a>
                                     <a href="{{ url('/logout') }}"
                                        onclick="event.preventDefault();

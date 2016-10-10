@@ -6,16 +6,28 @@
         <div class="col-md-8">
             <h1>{{ $post->title }}</h1>
             <p class="lead">{{ $post->body }}</p>
+            <hr>
+
+            <div class="tags">
+                @foreach($post->tags as $tag)
+                       <span class="label label-default">{{ $tag->name }}</span>
+                @endforeach
+            </div>
         </div>
 
         <div class="col-md-4">
             <div class="well">
-                <dl class="dl-horizontal"
+                <dl class="dl-horizontal">
+                <dt>Category:</dt>
+                <dd>{{ $post->category->name }}</dd>
+                </dl>
+
+                <dl class="dl-horizontal">
                     <dt>Created At:</dt>
                     <dd>{{ date('M j, Y H:i', strtotime($post->created_at)) }}</dd>
                 </dl>
 
-                <dl class="dl-horizontal"
+                <dl class="dl-horizontal">
                     <dt>Updated At:</dt>
                     <dd>{{ date('M j, Y H:i', strtotime($post->updated_at)) }}</dd>
                 </dl>
