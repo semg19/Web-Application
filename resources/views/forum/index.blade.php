@@ -10,7 +10,7 @@
 
                 <p>{{substr($post->body, 0, 250) }}{{ strlen($post->body) > 250 ? '...' : "" }}</p>
 
-                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">Read more</a>
+                <a href="{{ route('forum.show', $post->id) }}" class="btn btn-primary">Read more</a>
                 <hr>
             </div>
         </div>

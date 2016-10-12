@@ -31,12 +31,12 @@
                 <tbody>
                 @foreach($tag->posts as $post)
                 <tr>
-                    <th>{{ $posts->id }}</th>
-                    <td>{{ $posts->title }}</td>
-                    <td>@foreach($tag->tags as $tag)
-                            <span class="label label-default">{{$tag->name}}</span>
-                        @endforeach
-                    </td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-default btn-xs">View</a>
+                    <th>{{ $post->id }}</th>
+                    <td>{{ $post->title }}</td>
+                    <td>@foreach($post->tags as $tag)
+                            <span class="label label-default">{{ $tag->name }}</span>
+                        @endforeach</td>
+                    <td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-default btn-xs">View</a></td>
                 </tr>
                 @endforeach
                 </tbody>

@@ -9,15 +9,27 @@ use App\Post;
 
 class ForumController extends Controller
 {
-    public function getIndex() {
-        $posts = Post::orderBy('id', 'desc')->paginate(10);
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
+    /**
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $posts = Post::orderBy('id', 'desc')->paginate(10);
         return view('forum.index')->withPosts($posts);
     }
 
-    public function getSingle() {
-        //$post = Post::where('category_id', '=', $category_id)->first();
-
-        return view('posts.show')->withPost($post);
-}
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $post = Post::find($id)->first();
+        return view('forum.show')->withPost($post);
+    }
 }
