@@ -25,7 +25,7 @@
                     </select>
 
                     {{ Form::label('tags', 'Tags:') }}
-                    <select class="form-control js-example-basic-multiple form-control" name="tags[]" multiple="multiple">
+                    <select id="tag_list" class="form-control js-example-basic-multiple form-control" name="tags[]" multiple="multiple">
                         @foreach($tags as $tag)
                             <option value='{{ $tag->id }}'>{{ $tag->name }}</option>
                         @endforeach
@@ -36,6 +36,7 @@
                     {{ Form:: textarea('body', null, array('class' => 'form-control')) }}
 
                     {{ Form::submit('Create Post', array('class' => 'btn btn-success btn-lg btn-block')) }}
+                    <input type="hidden" value="{{ Session::token() }}" name="_token">
                 {!! Form::close() !!}
             </div>
         </div>
@@ -45,7 +46,7 @@
 @section('scripts')
 
     <script type="text/javascript">
-        $('.select2-multi').select2();
+        $('#tag_list').select2();
     </script>
 
 @endsection

@@ -29,7 +29,7 @@ class ForumController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id)->first();
+        $post = Post::find($id);
         return view('forum.show')->withPost($post);
     }
 }

@@ -9,6 +9,8 @@ use App\Post;
 use Session;
 use App\Category;
 use App\Tag;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -45,7 +47,7 @@ class PostController extends Controller
     {
         $this->validate($request, array(
             'title' => 'required|max:225',
-            'category_id' => 'required|numeric',
+            'category_id' => 'required|integer',
             'body' => 'required'
         ));
 
@@ -55,7 +57,8 @@ class PostController extends Controller
     $post->category_id = $request->category_id;
     $post->body = $request->body;
 
-    $post->save();
+//    $post->save();
+    $request->user()->posts()->save();
 
     $post->tags()->sync($request->tags, false);
 
@@ -111,6 +114,10 @@ class PostController extends Controller
 
         $post = Post::find($id);
 
+        if (Auth::user() != $post->user) {
+            return redirect()->back();
+        }
+
         $post->title = $request->input('title');
         $post->category_id = $request->input('category_id');
         $post->body = $request->input('body');
@@ -137,6 +144,9 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->tags()->detach();
 
+        if (Auth::user() != $post->user) {
+            return redirect()->back();
+        }
         $post->delete();
 
         Session::flash('success', 'This post was succesfully deleted.');
