@@ -75,6 +75,9 @@
                                     <a href="{{ url('/tags') }}">
                                         Tags
                                     </a>
+                                    <a href="{{ url('/admin') }}">
+                                        Admin
+                                    </a>
                                     <a href="{{ url('/logout') }}"
                                        onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">

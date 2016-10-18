@@ -21,7 +21,6 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
                             <th>Comment</th>
                             <th width="70px"></th>
                         </tr>
@@ -30,12 +29,13 @@
                     <tbody>
                         @foreach($post->comments as $comment)
                         <tr>
-                            <td>{{ $comment->name }}</td>
-                            <td>{{ $comment->email }}</td>
+                            <td>{{ $comment->user->name }}</td>
                             <td>{{ $comment->comment }}</td>
                             <td>
+                                @if(Auth::user() == $post->user)
                                 <a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary">Edit</a>
                                 <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-xs btn-danger">Delete</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -62,6 +62,7 @@
                 </dl>
                 <hr>
                 <div class="row">
+                    @if(Auth::user() == $post->user)
                     <div class="col-sm-6">
                         {!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
                     </div>
@@ -72,6 +73,7 @@
 
                         {!! Form::close() !!}
                     </div>
+                    @endif
                 </div>
 
                 <div class="row">

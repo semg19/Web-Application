@@ -2,7 +2,7 @@
 
 @section('content')
 
-    {{ Form::model($user, ['route' => ['account.save', $user->id], 'method' => "PUT"]) }}
+    {{ Form::model($user, ['route' => ['account.save'], 'method' => "PUT"]) }}
 
     {{ Form::label('name', "Name:") }}
     {{ Form::text('name', null, ['class' => 'form-control']) }}

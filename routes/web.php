@@ -20,17 +20,13 @@ Route::get('/', function () {
 Auth::routes();
 
 //Roles
-Route::get('/admin', ['uses' => 'HomeController@getAdminPage', 'as' => 'admin', 'middleware' => 'roles', 'roles' => ['Admin']]);
-Route::get('/admin/assign-roles', ['uses' => 'HomeController@postAdminAssignRoles', 'as' => 'roles.admin']);
-Route::get('/author', ['uses' => 'HomeController@getAuthorPage', 'as' => 'author', 'middleware' => 'roles', 'roles' => ['Admin', 'Author']]);
-Route::get('/user', ['uses' => 'HomeController@index', 'as' => 'user', 'middleware' => 'roles', 'roles' => ['User']]);
+Route::get('/admin', ['uses' => 'HomeController@getAdminPage', 'as' => 'roles.admin', 'middleware' => 'roles', 'roles' => ['Admin']]);
+Route::post('/adminassign', ['uses' => 'HomeController@postAdminAssignRoles', 'as' => 'admin.assign']);
 Route::get('/account', ['uses' => 'HomeController@getAccount', 'as' => 'account']);
-Route::post('/account', ['uses' => 'HomeController@postSaveAccount', 'as' => 'account.save']);
+Route::put('/updateaccount', ['uses' => 'HomeController@postSaveAccount', 'as' => 'account.save']);
 
 //Application
 Route::get('/home', 'HomeController@index');
-
-//Route::resource('forum', 'ForumController');
 Route::get('forum', ['uses' => 'ForumController@index', 'as' => 'forum.index', 'middleware' => 'roles', 'roles' => ['Admin', 'Author', 'User']]);
 Route::get('forum/{id}', ['uses' => 'ForumController@show', 'as' => 'forum.show', 'middleware' => 'roles', 'roles' => ['Admin', 'Author', 'User']]);
 

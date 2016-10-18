@@ -6,8 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <h1>Delete This Comment.</h1>
             <p>
-                <strong>Name:</strong> {{ $comment->name }}<br>
-                <strong>Email:</strong> {{ $comment->email }}<br>
+                <strong>Name:</strong> {{ $comment->user }}<br>
                 <strong>Comment:</strong> {{ $comment->comment }}
             </p>
 

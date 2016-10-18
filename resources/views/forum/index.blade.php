@@ -9,7 +9,7 @@
                 <h5>Published: {{ date('M j, Y', strtotime($post->created_at)) }}</h5>
 
                 <p>{{substr($post->body, 0, 250) }}{{ strlen($post->body) > 250 ? '...' : "" }}</p>
-                <p> {{ $post->user }}</p>
+                <p> {{ $post->user->name }}</p>
                 <a href="{{ route('forum.show', $post->id) }}" class="btn btn-primary">Read more</a>
                 <hr>
             </div>

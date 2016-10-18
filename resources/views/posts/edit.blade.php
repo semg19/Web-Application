@@ -38,6 +38,7 @@
                 </dl>
                 <hr>
                 <div class="row">
+                    @if(Auth::user() == $post->user)
                     <div class="col-sm-6">
                         {!! Html::linkRoute('posts.show', 'Cancel', array($post->id), array('class' => 'btn btn-danger btn-block')) !!}
                     </div>
@@ -45,6 +46,7 @@
                         {{ Form::submit('Save', ['class' => 'btn btn-success btn-block']) }}
                     </div>
                 </div>
+                    @endif
             </div>
         </div>
         {!! Form::close() !!}

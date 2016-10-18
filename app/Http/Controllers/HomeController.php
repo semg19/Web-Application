@@ -7,6 +7,7 @@ use App\Post;
 use App\Role;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class HomeController extends Controller
 {
@@ -31,15 +32,10 @@ class HomeController extends Controller
         return view('home')->withPosts($posts);
     }
 
-    public function getAuthorPage()
-    {
-        return view('author');
-    }
-
     public function getAdminPage()
     {
         $users = User::all();
-        return view('admin', ['users' => $users]);
+        return view('roles.admin', ['users' => $users]);
     }
 
     public function getAccount()
@@ -59,7 +55,7 @@ class HomeController extends Controller
         $user->update();
 
         Session::flash('success', 'Account updated.');
-        return redirect()->route('account.edit');
+        return redirect()->route('account');
     }
 
     public function postAdminAssignRoles(Request $request)

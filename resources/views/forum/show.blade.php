@@ -7,6 +7,7 @@
             <h1>{{ $post->title }}</h1>
             <p>{{ $post->body }}</p>
             <hr>
+            <p>Placed by: {{ $post->user->name }}</p>
             <p>Posted In: {{ $post->category->name }}</p>
             <hr>
         </div>
@@ -14,10 +15,18 @@
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            <h3><b>Comments</b></h3>
             @foreach($post->comments as $comment)
                 <div class="comment">
-                    <p><strong>Name:</strong> {{ $comment->name }}</p>
+                    <p><strong>Name:</strong> {{ $comment->user->name }}</p>
                     <p><strong>Comment:</strong> {{ $comment->comment }}</p>
+                    <p>
+                        @if(Auth::user() == $comment->user)
+                            <a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary">Edit</a>
+                            <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-xs btn-danger">Delete</a>
+                        @endif
+                    </p>
+                    <hr>
                 </div>
             @endforeach
         </div>
@@ -26,17 +35,6 @@
     <div class="row">
         <div id="comment-form" class="col-md-8 col-md-offset-2" style="margin-top: 50px;">
             {{ Form::open(['route' => ['comments.store', $post->id, 'method' => 'POST']]) }}
-
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ Form::label('name', "Name:") }}
-                        {{ Form::text('name', null, ['class' => 'form-control']) }}
-                    </div>
-
-                <div class="col-md-6">
-                    {{ Form::label('email', 'Email:') }}
-                    {{ Form::text('email', null, ['class' => 'form-control']) }}
-                </div>
 
                 <div class="col-md-12">
                     {{ Form::label('comment', 'Comment:') }}

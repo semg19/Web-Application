@@ -8,17 +8,12 @@
 
                 {{ Form::model($comment, ['route' => ['comments.update', $comment->id], 'method' => "PUT"]) }}
 
-                    {{ Form::label('name', "Name:") }}
-                    {{ Form::text('name', null, ['class' => 'form-control', 'disabled' => '']) }}
-
-                    {{ Form::label('email', "Email:") }}
-                    {{ Form::text('name', null, ['class' => 'form-control', 'disabled' => '']) }}
-
                     {{ Form::label('comment', "Comment:") }}
                     {{ Form::textarea('comment', null, ['class' => 'form-control']) }}
 
+                 @if(Auth::user() == $comment->user)
                     {{ Form::submit('Update Comment', ['class' => 'btn btn-success', 'style' => 'margin-top:15px;']) }}
-
+                 @endif
                 {{ Form::close() }}
 
     </div>

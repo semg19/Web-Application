@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Post;
 use App\Comment;
 use Session;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
@@ -40,21 +42,17 @@ class CommentsController extends Controller
     public function store(Request $request, $post_id)
     {
         $this->validate($request, array(
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255',
             'comment' => 'required|min:5|max:2000'
         ));
 
         $post = Post::find($post_id);
 
         $comment = new Comment();
-        $comment->name = $request->name;
-        $comment->email = $request->email;
         $comment->comment = $request->comment;
         $comment->approved = true;
         $comment->post()->associate($post);
 
-        $comment->save();
+        $request->user()->comments()->save($comment);
 
         Session::flash('success', 'Comment was added.');
 
@@ -95,6 +93,10 @@ class CommentsController extends Controller
     {
         $comment = Comment::find($id);
 
+        if (Auth::user() != $comment->user) {
+            return redirect()->back();
+        }
+
         $this->validate($request, array('comment' => 'required'));
 
         $comment->comment = $request->comment;
@@ -121,6 +123,11 @@ class CommentsController extends Controller
     {
         $comment = Comment::find($id);
         $post_id = $comment->post->id;
+
+        if (Auth::user() != $comment->user) {
+            return redirect()->back();
+        }
+
         $comment->delete();
 
         Session::flash('success', 'Deleted comment.');

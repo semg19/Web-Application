@@ -23,11 +23,17 @@ class PostController extends Controller
     /**
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $posts = Post::orderBy('id', 'desc')->paginate(10);
-        return view('posts.index')->withPosts($posts);
-    }
+public function index()
+{
+    $search = \Request::get('search');
+
+    $posts = Post::where('title','like','%'.$search.'%')
+        ->orderBy('id', 'desc')
+        ->paginate(10);
+
+    return view('posts.index',compact('posts'));
+}
+
 
     /**
      * @return \Illuminate\Http\Response
@@ -57,8 +63,7 @@ class PostController extends Controller
     $post->category_id = $request->category_id;
     $post->body = $request->body;
 
-//    $post->save();
-    $request->user()->posts()->save();
+    $request->user()->posts()->save($post);
 
     $post->tags()->sync($request->tags, false);
 
