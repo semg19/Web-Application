@@ -28,6 +28,7 @@ public function index()
     $search = \Request::get('search');
 
     $posts = Post::where('title','like','%'.$search.'%')
+        ->orWhere('body', 'like', '%' . $search . '%')
         ->orderBy('id', 'desc')
         ->paginate(10);
 

@@ -22,6 +22,7 @@ Auth::routes();
 //Roles
 Route::get('/admin', ['uses' => 'HomeController@getAdminPage', 'as' => 'roles.admin', 'middleware' => 'roles', 'roles' => ['Admin']]);
 Route::post('/adminassign', ['uses' => 'HomeController@postAdminAssignRoles', 'as' => 'admin.assign']);
+Route::post('/toggle', 'HomeController@toggle');
 Route::get('/account', ['uses' => 'HomeController@getAccount', 'as' => 'account']);
 Route::put('/updateaccount', ['uses' => 'HomeController@postSaveAccount', 'as' => 'account.save']);
 

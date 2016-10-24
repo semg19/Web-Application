@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-{{--@include('pages.search',['url'=>'posts','link'=>'posts'])--}}
-
 @section('content')
 
     <div class="row">
@@ -65,6 +63,6 @@
             </div>
         </div>
     </div>
-
 @endsection
+
 

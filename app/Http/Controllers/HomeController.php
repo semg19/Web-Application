@@ -28,8 +28,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
-        return view('home')->withPosts($posts);
+        $id = Auth::id();
+        $active = User::where('id', '=', $id)->first();
+        if($active->active == 1){
+            $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
+            return view('home')->withPosts($posts);
+        }else{
+            Auth::logout();
+            return view('errors/unactive');
+        }
     }
 
     public function getAdminPage()
@@ -72,5 +79,19 @@ class HomeController extends Controller
             $user->roles()->attach(Role::where('name', 'Admin')->first());
         }
         return redirect()->back();
+    }
+
+    public function toggle()
+    {
+        $data = Request::capture()->all();
+        $state = User::where('id', '=', $data['user_id'])->first();
+        if ($state->active == 1) {
+            User::where('id', '=', $data['user_id'])->update(array('active' => 0));
+            $toggleState = 'images/nonactive.png';
+        } else {
+            User::where('id', '=', $data['user_id'])->update(array('active' => 1));
+            $toggleState = 'images/active.png';
+        }
+        return $toggleState;
     }
 }

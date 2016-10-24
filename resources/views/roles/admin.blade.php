@@ -24,9 +24,19 @@
                 <td><input type="checkbox" {{ $user->hasRole('Admin') ? 'checked' : ''}} name="role_admin"></td>
                 {{ csrf_field() }}
                 <td><button type="submit" class="btn btn-default btn-sm">Assign Roles</button></td>
+                    <td>
+                        <div class="buttondiv">
+                            @if($user->active == 1)
+                                <img src="images/active.png" height="60" width="70" class="toggle" id="{{$user->id}}">
+                            @else
+                                <img src="images/nonactive.png" height="70" width="70" class="toggle" id="{{$user->id}}">
+                            @endif
+                        </div>
+                    </td>
                 </form>
             </tr>
         @endforeach
         </tbody>
     </table>
+    <script src="{{ URL::asset('js/toggle.js') }}"></script>
 @endsection
