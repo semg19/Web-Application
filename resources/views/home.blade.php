@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div>
-                            <a href="{{ route('posts.create') }}"class="btn btn-lg btn-block btn-primary btn-h1-spacing">Create New Post</a>
+                            <a href="{{ route('posts.create') }}" class="btn btn-lg btn-block btn-primary btn-h1-spacing">Create New Post</a>
                         </div>
                         @foreach($posts as $post)
                         <div class="col-md-8">

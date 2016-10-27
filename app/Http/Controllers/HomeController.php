@@ -30,6 +30,7 @@ class HomeController extends Controller
     {
         $id = Auth::id();
         $active = User::where('id', '=', $id)->first();
+        Auth::user()->increment('total_logins');
         if($active->active == 1){
             $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
             return view('home')->withPosts($posts);

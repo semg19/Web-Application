@@ -47,16 +47,24 @@ class CommentsController extends Controller
 
         $post = Post::find($post_id);
 
-        $comment = new Comment();
-        $comment->comment = $request->comment;
-        $comment->approved = true;
-        $comment->post()->associate($post);
+        $id = Auth::id();
+        $query = User::where('id', '=', $id)->first();
+        $total_logins = $query->total_logins;
 
-        $request->user()->comments()->save($comment);
+        if ($total_logins >= 2) {
+            $comment = new Comment();
+            $comment->comment = $request->comment;
+            $comment->approved = true;
+            $comment->post()->associate($post);
+            $request->user()->comments()->save($comment);
 
-        Session::flash('success', 'Comment was added.');
+            Session::flash('success', 'Comment was added.');
 
-        return redirect()->route('forum.show', [$post->id]);
+            return redirect()->route('forum.show', [$post->id]);
+        } else {
+            return view('errors/logins');
+        }
+
     }
 
     /**

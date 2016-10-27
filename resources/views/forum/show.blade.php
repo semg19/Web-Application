@@ -9,6 +9,11 @@
             <hr>
             <p>Placed by: {{ $post->user->name }}</p>
             <p>Posted In: {{ $post->category->name }}</p>
+            <div class="tags">
+                @foreach($post->tags as $tag)
+                    <span class="label label-default">{{ $tag->name }}</span>
+                @endforeach
+            </div>
             <hr>
         </div>
     </div>

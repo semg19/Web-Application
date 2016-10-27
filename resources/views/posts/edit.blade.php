@@ -39,7 +39,6 @@
                 <hr>
                 <div class="row">
                     @if(Auth::user() == $post->user)
-                    @elseif(Auth::check() )
                     <div class="col-sm-6">
                         {!! Html::linkRoute('posts.show', 'Cancel', array($post->id), array('class' => 'btn btn-danger btn-block')) !!}
                     </div>

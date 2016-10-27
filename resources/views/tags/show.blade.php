@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <h1>{{ $tag->name }} Tag <small>{{$tag->posts()->count()}} Posts</small></h1>
+            <h1>{{ $tag->name }} Tag <small>{{ $tag->posts()->count() }} Posts</small></h1>
         </div>
         <div class="col-md-2">
             <a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-primary btn-block pull-right" style="margin-top:20px;">Edit</a>

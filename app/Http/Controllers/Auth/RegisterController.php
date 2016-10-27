@@ -76,6 +76,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'active' => 1,
+            'total_logins' => 0
         ]);
 
         $user->roles()->attach(Role::where('name', 'User')->first());
