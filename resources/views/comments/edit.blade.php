@@ -14,6 +14,9 @@
                  @if(Auth::user() == $comment->user)
                     {{ Form::submit('Update Comment', ['class' => 'btn btn-success', 'style' => 'margin-top:15px;']) }}
                  @endif
+                 @if (Auth::user()->isAdmin())
+                 {{ Form::submit('Update Comment', ['class' => 'btn btn-success', 'style' => 'margin-top:15px;']) }}
+                 @endif
                 {{ Form::close() }}
 
     </div>

@@ -36,6 +36,10 @@
                                 <a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary">Edit</a>
                                 <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-xs btn-danger">Delete</a>
                                 @endif
+                                @if(Auth::user()->isAdmin())
+                                <a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary">Edit</a>
+                                <a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-xs btn-danger">Delete</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -63,6 +67,18 @@
                 <hr>
                 <div class="row">
                     @if(Auth::user() == $post->user)
+                    <div class="col-sm-6">
+                        {!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
+                    </div>
+                    <div class="col-sm-6">
+                        {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
+
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
+
+                        {!! Form::close() !!}
+                    </div>
+                    @endif
+                    @if(Auth::user()->isAdmin())
                     <div class="col-sm-6">
                         {!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
                     </div>

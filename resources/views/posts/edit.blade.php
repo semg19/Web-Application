@@ -40,13 +40,21 @@
                 <div class="row">
                     @if(Auth::user() == $post->user)
                     <div class="col-sm-6">
-                        {!! Html::linkRoute('posts.show', 'Cancel', array($post->id), array('class' => 'btn btn-danger btn-block')) !!}
+                    {!! Html::linkRoute('posts.show', 'Cancel', array($post->id), array('class' => 'btn btn-danger btn-block')) !!}
                     </div>
                     <div class="col-sm-6">
                         {{ Form::submit('Save', ['class' => 'btn btn-success btn-block']) }}
                     </div>
-                </div>
                     @endif
+                    @if(Auth::user()->isAdmin())
+                        <div class="col-sm-6">
+                            {!! Html::linkRoute('posts.show', 'Cancel', array($post->id), array('class' => 'btn btn-danger btn-block')) !!}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ Form::submit('Save', ['class' => 'btn btn-success btn-block']) }}
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
         {!! Form::close() !!}

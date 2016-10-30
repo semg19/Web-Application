@@ -30,7 +30,7 @@ public function index()
     $posts = Post::where('title','like','%'.$search.'%')
         ->orWhere('body', 'like', '%' . $search . '%')
         ->orderBy('id', 'desc')
-        ->paginate(10);
+        ->paginate(6);
 
     return view('posts.index',compact('posts'));
 }
@@ -120,9 +120,9 @@ public function index()
 
         $post = Post::find($id);
 
-        if (Auth::user() != $post->user) {
-            return redirect()->back();
-        }
+//        if (Auth::user() != $post->user) {
+//            return redirect()->back();
+//        }
 
         $post->title = $request->input('title');
         $post->category_id = $request->input('category_id');
@@ -150,9 +150,9 @@ public function index()
         $post = Post::find($id);
         $post->tags()->detach();
 
-        if (Auth::user() != $post->user) {
-            return redirect()->back();
-        }
+//        if (Auth::user() != $post->user) {
+//            return redirect()->back();
+//        }
         $post->delete();
 
         Session::flash('success', 'This post was succesfully deleted.');

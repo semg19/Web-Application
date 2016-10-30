@@ -51,6 +51,9 @@
                             @if(Auth::user() == $post->user)
                             <td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-default btn-sm">View</a> <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-default btn-sm">Edit</a></td>
                             @endif
+                            @if(Auth::user()->isAdmin())
+                            <td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-default btn-sm">View</a> <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-default btn-sm">Edit</a></td>
+                            @endif
                         </tr>
 
                     @endforeach

@@ -101,9 +101,9 @@ class CommentsController extends Controller
     {
         $comment = Comment::find($id);
 
-        if (Auth::user() != $comment->user) {
-            return redirect()->back();
-        }
+//        if (Auth::user() != $comment->user) {
+//            return redirect()->back();
+//        }
 
         $this->validate($request, array('comment' => 'required'));
 
@@ -131,10 +131,11 @@ class CommentsController extends Controller
     {
         $comment = Comment::find($id);
         $post_id = $comment->post->id;
+        $post = Post::find($id);
 
-        if (Auth::user() != $comment->user) {
-            return redirect()->back();
-        }
+//        if (Auth::user() != $comment->user) {
+//            return redirect()->back();
+//        }
 
         $comment->delete();
 
